@@ -3,6 +3,7 @@ A Kanban board is a simple form of task management. Every task that you add can 
 - To do
 - Doing
 - Done
+
 It also supports the following functionalities:
 - Creating a new task and selecting its state 
 - Moving tasks to different states
