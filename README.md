@@ -1,6 +1,6 @@
 # Flask Kanban Board 
 A Kanban board is a simple form of task management. Every task that you add can be in one of three states:
-- To do
+- Todo
 - Doing
 - Done
 
