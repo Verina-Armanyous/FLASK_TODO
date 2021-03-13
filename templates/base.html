@@ -14,30 +14,70 @@
   </head>
   <body>
     <h1>Kanban Board</h1>
-    <form action="/add" method="POST">
-      <label for="title">Add a task here:</label>
-      <input type="text" placeholder="E.g., buy groceries" name="title" />
-      <button type="submit" id="submit-button"><i class="fa fa-plus"></i></button>
-    </form>
+    <div>
+      <form method="POST" action="/add">
+ 
+          {{ form.csrf_token() }}
+          <div>
+            <label for="">{{ form.title.label }}</label>
+              {{ form.title }}
+          </div>
+          <div>
+            <label for="">Select State</label>
+              {{ form.state }}
+          </div>
+            {{ form.submit(id="submit-button")}} 
+      </form>
+    </div>
     <div class="board">
-      <div class="container" id="first-container">
+      <div class = 'container'id="first-container">
         <h3>Todo</span></h3>
         <!-- show the todo item  -->
         {% for todo in todo_list%}
+        {% if todo.state == "todo"%}
         <div class="card">
           <span>{{todo.title}}</span>
-
-          <!-- delete button -->
           <a href="/delete/{{todo.id}}"><span class="fa fa-trash" id="delete-button"></a>
+          <a href="/update_right/{{todo.id}}"><span class="fa fa-arrow-right" id="right-button"></a>
+
         </div>
+        {% endif %}
         {% endfor %}
         <!-- end of show the todo item  -->
       </div>
-      <div class="container" id="second-container">
+      <div class = 'container' id="second-container">
         <h3>In Progress</h3>
+                <!-- show the todo item  -->
+        {% for todo in todo_list%}
+        {% if todo.state == "in-progress"%}
+        <div class="card">
+          <span>{{todo.title}}</span>
+                    <!-- delete button -->
+          <a href="/delete/{{todo.id}}"><span class="fa fa-trash" id="delete-button"></a>
+          <a href="/update_right/{{todo.id}}"><span class="fa fa-arrow-right" id="right-button"></a>
+          <a href="/update_left/{{todo.id}}"><span class="fa fa-arrow-left" id="left-button"></a>
+
+
+        </div>
+        {% endif %}
+        {% endfor %}
+        <!-- end of show the todo item  -->
       </div>
-      <div class="container" id="third-container">
+      <div class = 'container' id="third-container">
         <h3>Done</h3>
+                <!-- show the todo item  -->
+        {% for todo in todo_list%}
+        {% if todo.state == "done"%}
+        <div class="card">
+          <span>{{todo.title}}</span>
+          <!-- delete button -->
+          <a href="/delete/{{todo.id}}"><span class="fa fa-trash" id="delete-button"></a>
+          <a href="/update_left/{{todo.id}}"><span class="fa fa-arrow-left" id="left-button"></a>
+
+        </div>
+        {% endif %}
+        {% endfor %}
+        <!-- end of show the todo item  -->
       </div>
     </div>
   </body>
