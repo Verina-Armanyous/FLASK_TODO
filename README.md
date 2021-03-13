@@ -49,7 +49,7 @@ Install dependencies in virtual environment:
     $ pip3 install -r requirements.txt
 
 
-## 5- Start the server
+##### 5- Start the server
 
 Start the server by running:
 
