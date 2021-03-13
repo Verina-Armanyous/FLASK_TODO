@@ -9,9 +9,6 @@ It also supports the following functionalities:
 - Moving tasks to different states
 - Deleting tasks
 
-## Run Virtual Environment
-
-Virtual environment is a key component in ensuring that the application is configured in the right environment
 
 ##### Requirements
 * Python 3
@@ -23,17 +20,18 @@ $ brew install python3
 
 Pip3 is installed with Python3
 
-##### Installation
+### Steps to run the app: 
+##### 1- Installation of virtual environment
 To install virtualenv via pip run:
 ```bash
 $ pip3 install virtualenv
 ```
 
-##### Usage
+##### 2- Create virtual environment
 Creation of virtualenv:
 
     $ python3 -m venv venv
-
+##### 3- Activate virtual environment
 To activate the virtualenv:
 
     $ source venv/bin/activate
@@ -45,16 +43,13 @@ Or, if you are **using Windows** - [reference source:](https://stackoverflow.com
 To deactivate the virtualenv (after you finished working):
 
     $ deactivate
-
+##### 4- Install dependencies
 Install dependencies in virtual environment:
 
     $ pip3 install -r requirements.txt
 
-## Environment Variables
 
-All environment variables are stored within the `.env` file and loaded with dotenv package.
-
-## To run the application
+## 5- Start the server
 
 Start the server by running:
 
