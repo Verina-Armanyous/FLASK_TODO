@@ -1,13 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-# from flask_fontawesome import FontAwesome
-
+from flask_wtf import FlaskForm
+from wtforms import StringField, TextField, SubmitField, SelectField
+from wtforms.validators import DataRequired, Length
+import os
 app = Flask(__name__)
-# FontAwesome(app)
 
-# database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///web.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 db = SQLAlchemy(app)
 
 
@@ -15,21 +16,33 @@ db = SQLAlchemy(app)
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
-    complete = db.Column(db.Boolean)
+    state = db.Column(db.String(20))
 
 
-@app.route('/')
+class TodoForm(FlaskForm):
+    """Todo form."""
+    title = StringField(label=('Enter Task:'),
+                        validators=[DataRequired()])
+    state = SelectField(u'Select State', choices=[(
+        'todo'), ('in-progress'), ('done')])
+    submit = SubmitField('Add')
+
+
+@app.route("/", methods=["GET", "POST"])
 def index():
+    """Standard `contact` form."""
+    form = TodoForm()
     todo_list = Todo.query.all()
-    print(todo_list)
-    return render_template('base.html', todo_list=todo_list)
+    return render_template(
+        "base.html",
+        form=form, todo_list=todo_list)
 
 
-# This adds new todos
-@app.route("/add", methods=["POST"])
-def add():
+@app.route('/add', methods=['POST', 'GET'])
+def new_task():
     title = request.form.get("title")
-    new_todo = Todo(title=title, complete=False)
+    state = request.form.get("state")
+    new_todo = Todo(title=title, state=state)
     db.session.add(new_todo)
     db.session.commit()
     return redirect(url_for("index"))
@@ -40,6 +53,28 @@ def add():
 def delete(todo_id):
     todo = Todo.query.filter_by(id=todo_id).first()
     db.session.delete(todo)
+    db.session.commit()
+    return redirect(url_for("index"))
+
+
+@app.route("/update_right/<int:todo_id>")
+def update_right(todo_id):
+    todo = Todo.query.filter_by(id=todo_id).first()
+    if todo.state == "todo":
+        todo.state = "in-progress"
+    elif todo.state == "in-progress":
+        todo.state = "done"
+    db.session.commit()
+    return redirect(url_for("index"))
+
+
+@app.route("/update_left/<int:todo_id>")
+def update_left(todo_id):
+    todo = Todo.query.filter_by(id=todo_id).first()
+    if todo.state == "done":
+        todo.state = "in-progress"
+    elif todo.state == "in-progress":
+        todo.state = "todo"
     db.session.commit()
     return redirect(url_for("index"))
 
