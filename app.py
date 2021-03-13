@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-from flask_fontawesome import FontAwesome
+# from flask_fontawesome import FontAwesome
+
 app = Flask(__name__)
-FontAwesome(app)
+# FontAwesome(app)
 
 # database configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
