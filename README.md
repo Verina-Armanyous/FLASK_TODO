@@ -9,6 +9,7 @@ It also supports the following functionalities:
 - Moving tasks to different states
 - Deleting tasks
 
+![ezgif-7-c8dd76fb5ebc](https://user-images.githubusercontent.com/47928071/111052764-c4257900-8412-11eb-91f9-80345392aee3.gif)
 
 ##### Requirements
 * Python 3
