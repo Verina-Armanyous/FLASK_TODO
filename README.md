@@ -53,9 +53,7 @@ Install dependencies in virtual environment:
 
 Start the server by running:
 
-    $ export FLASK_ENV=development
-    $ export FLASK_APP=web
-    $ python3 -m flask run
+    $ python3 app.py
 
 ## Unit Tests
 To run the unit tests use the following commands:
