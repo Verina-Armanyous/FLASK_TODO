@@ -1,0 +1,76 @@
+body {
+  background-color: #262833;
+}
+
+h1 {
+  color: #ffffff;
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 50px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  line-height: 1;
+  text-align: center;
+}
+
+form {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  height: 30px;
+}
+input {
+  width: 15%;
+  height: 20px;
+}
+#submit-button {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  border-radius: 15px;
+  color: #5177e4;
+  font-weight: bold;
+}
+#submit-button:hover {
+  background-color: #ffc689;
+}
+.board {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+#first-container {
+  background-color: #ffae5f;
+}
+#second-container {
+  background-color: #7f8de0;
+}
+#third-container {
+  background-color: #37c6d0;
+}
+.container {
+  width: 25%;
+  clear: right;
+  margin: 15px;
+  border-radius: 5px;
+}
+
+.card {
+  background-color: white;
+  margin: 10px;
+  padding: 5px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+}
+#delete-button {
+  float: right;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  line-height: 50px;
+  color: #fd4522;
+  padding-right: 10px;
+}
