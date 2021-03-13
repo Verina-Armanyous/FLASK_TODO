@@ -12,11 +12,13 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 db = SQLAlchemy(app)
 
 
-# db module
+# create database module
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
     state = db.Column(db.String(20))
+
+# create flask WTF form to take input from user
 
 
 class TodoForm(FlaskForm):
@@ -28,6 +30,7 @@ class TodoForm(FlaskForm):
     submit = SubmitField('Add')
 
 
+# routing for the main page that renders all the todo items
 @app.route("/", methods=["GET", "POST"])
 def index():
     """Standard `contact` form."""
@@ -38,6 +41,7 @@ def index():
         form=form, todo_list=todo_list)
 
 
+# routing for adding a new todo entry
 @app.route('/add', methods=['POST', 'GET'])
 def new_task():
     title = request.form.get("title")
@@ -48,7 +52,7 @@ def new_task():
     return redirect(url_for("index"))
 
 
-# This deletes
+# routing for deleting a todo entry
 @app.route("/delete/<int:todo_id>")
 def delete(todo_id):
     todo = Todo.query.filter_by(id=todo_id).first()
@@ -57,6 +61,7 @@ def delete(todo_id):
     return redirect(url_for("index"))
 
 
+# routing to move a todo entry to a right state
 @app.route("/update_right/<int:todo_id>")
 def update_right(todo_id):
     todo = Todo.query.filter_by(id=todo_id).first()
@@ -66,6 +71,8 @@ def update_right(todo_id):
         todo.state = "done"
     db.session.commit()
     return redirect(url_for("index"))
+
+# routing to move a todo entry to a left state
 
 
 @app.route("/update_left/<int:todo_id>")
