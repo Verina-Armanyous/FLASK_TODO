@@ -15,6 +15,7 @@
   <body>
     <h1>Kanban Board</h1>
     <div>
+      <!-- Show the wtf form  -->
       <form method="POST" action="/add">
  
           {{ form.csrf_token() }}
@@ -29,6 +30,15 @@
             {{ form.submit(id="submit-button")}} 
       </form>
     </div>
+  <!-- 
+    -- board div
+     --- contain one div
+        -- cards div
+     --- container two div
+        -- cards div
+     --- container three div
+         -- cards div 
+    -->
     <div class="board">
       <div class = 'container'id="first-container">
         <h3>Todo</span></h3>
@@ -52,7 +62,7 @@
         {% if todo.state == "in-progress"%}
         <div class="card">
           <span>{{todo.title}}</span>
-                    <!-- delete button -->
+                    <!-- delete and move buttons -->
           <a href="/delete/{{todo.id}}"><span class="fa fa-trash" id="delete-button"></a>
           <a href="/update_right/{{todo.id}}"><span class="fa fa-arrow-right" id="right-button"></a>
           <a href="/update_left/{{todo.id}}"><span class="fa fa-arrow-left" id="left-button"></a>
@@ -70,7 +80,7 @@
         {% if todo.state == "done"%}
         <div class="card">
           <span>{{todo.title}}</span>
-          <!-- delete button -->
+          <!-- delete and move buttons  -->
           <a href="/delete/{{todo.id}}"><span class="fa fa-trash" id="delete-button"></a>
           <a href="/update_left/{{todo.id}}"><span class="fa fa-arrow-left" id="left-button"></a>
 
