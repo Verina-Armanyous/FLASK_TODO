@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {{ fontawesome_html() }}
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static',filename='base.css') }}"
+    />
+
+    <title>Kanban Board</title>
+  </head>
+  <body>
+    <h1>Kanban Board</h1>
+    <form action="/add" method="POST">
+      <label for="title">Add a task here:</label>
+      <input type="text" placeholder="E.g., buy groceries" name="title" />
+      <button type="submit" id="submit-button"><i class="fas fa-plus"></i></button>
+    </form>
+    <div class="board">
+      <div class="container" id="first-container">
+        <h3>Todo</span></h3>
+        <!-- show the todo item  -->
+        {% for todo in todo_list%}
+        <div class="card">
+          <span>{{todo.title}}</span>
+
+          <!-- delete button -->
+          <a href="/delete/{{todo.id}}"><span class="fas fa-trash" id="delete-button"></a>
+        </div>
+        {% endfor %}
+        <!-- end of show the todo item  -->
+      </div>
+      <div class="container" id="second-container">
+        <h3>In Progress</h3>
+      </div>
+      <div class="container" id="third-container">
+        <h3>Done</h3>
+      </div>
+    </div>
+  </body>
+</html>
