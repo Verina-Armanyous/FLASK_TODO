@@ -63,4 +63,4 @@ To run the unit tests use the following commands:
     $ source venv_unit/bin/activate
     $ pip install -r requirements-unit.txt
     $ export DATABASE_URL='sqlite:///web.db'
-    $ pytest unit_test
+    $ python3 unittesting.py
