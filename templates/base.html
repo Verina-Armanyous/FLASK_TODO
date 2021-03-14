@@ -18,7 +18,9 @@
       <!-- Show the wtf form  -->
       <form method="POST" action="/add">
  
-          {{ form.csrf_token() }}
+          {% if 'csrf_token' in form %}
+              {{form.csrf_token}}
+          {% endif %}
           <div>
             <label for="">{{ form.title.label }}</label>
               {{ form.title }}
